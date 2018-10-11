@@ -1,6 +1,6 @@
 AttachWebService
 ================================
-大附件上传、下载 WebService（CXF 框架，并开启 MTOM）<br>
+大附件上传、下载 WebService（CXF 框架，并开启 MTOM），可上传150M内<br>
 <br>
 ## Andy.wang
 
