@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<handler-chains xmlns="http://java.sun.com/xml/ns/javaee">
+   <handler-chain>
+   <!-- 配置可以记录出/入Endpoint消息内容到控制台的Handler -->
+    <handler>
+        <handler-name>LogHandler</handler-name>
+        <handler-class>com.changhongit.attach.ws.handlers.LogHandler</handler-class>
+    </handler>
+   </handler-chain>
+</handler-chains>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans     
+	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd  
+	http://www.springframework.org/schema/context  
+	http://www.springframework.org/schema/context/spring-context-4.0.xsd
+	http://www.springframework.org/schema/util
+	http://www.springframework.org/schema/util/spring-util-4.0.xsd">
+	<context:annotation-config />
+	<!-- 扫描包 -->
+	<context:component-scan base-package="com.changhongit.attach.ws"></context:component-scan>
+
+	<!-- 加载 jdbc，ftp 配置文件 -->
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
+	p:locations="file:///${catalina.home}/conf/AttachWebService/*.properties"/>
+
+	<!-- jdbc 配置 -->
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource"
+		p:driverClassName="${driverClassName}" p:url="${url}" p:username="${username}"
+		p:password="${password}" />
+
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate"
+		p:dataSource-ref="dataSource" />
+
+	<!-- ftp 配置 -->
+	<bean id="ftpPropertyBean" class="com.changhongit.attach.ws.bean.FtpPropertyBean"
+		p:userName="${FTP_USER_NAME}" p:password="${FTP_PASSWORD}" p:ftpIp="${FTP_SERVER}"
+		p:savePath="${FTP_SAVE_PATH}" />
+
+	<import resource="cxf-service.xml" />
+</beans>
+

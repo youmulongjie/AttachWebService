@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xsi:schemaLocation="http://cxf.apache.org/core
+	   http://cxf.apache.org/schemas/core.xsd
+	   http://www.springframework.org/schema/beans  
+       http://www.springframework.org/schema/beans/spring-beans-4.0.xsd  
+       http://cxf.apache.org/jaxws  
+       http://cxf.apache.org/schemas/jaxws.xsd"
+	xmlns:cxf="http://cxf.apache.org/core">
+
+	<!-- 上传最大200M -->
+	<cxf:bus>
+		<cxf:properties>
+			<entry key="org.apache.cxf.stax.maxTextLength" value="209715200" />
+		</cxf:properties>
+	</cxf:bus>
+
+	<!-- 上传到服务器本地，正式发布时需注释掉 -->
+	<jaxws:endpoint id="attachWSEndpoint" implementor="#attachWS"
+		address="/attachWS">
+		<jaxws:properties>
+			<entry key="mtom-enabled" value="true"></entry>
+		</jaxws:properties>
+	</jaxws:endpoint>
+	
+
+	<!-- 上传到FTP -->
+	<jaxws:endpoint id="attachFtpWSEndpoint" implementor="#attachFtpWS"
+		address="/attachFtpWS">
+		<jaxws:properties>
+			<!-- 注意：服务器端开启MTOM，客户端调用也必须开启 -->
+			<entry key="mtom-enabled" value="true"></entry>
+		</jaxws:properties>
+	</jaxws:endpoint>
+
+</beans>
+
